@@ -1,0 +1,9 @@
+To use:
+
+copy mytester.rb to your rails application folder
+use irb
+irb> require 'mytester'
+irb> a = Autotester.new #it will load your test/test_helper configuration here
+irb> a.doit() #start monitoring changes to your project
+
+when there is any changes the test will be automaticcally executed
