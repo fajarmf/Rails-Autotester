@@ -81,3 +81,15 @@ class Autotester
     end
   end
 end
+
+$tester = Autotester.new
+$input = ''
+while $input != 'q' && $input != 'Q'
+  puts 'watching the files now, will run the test after you save the changes'
+  begin
+  $tester.doit()
+  rescue
+    puts "Uh sorry! We encounter some problem, press 'q' to quit otherwise you can just press anykey to continue testing."
+    $input = STDIN.gets
+  end
+end
