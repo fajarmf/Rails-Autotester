@@ -5,6 +5,11 @@ gem install guard
 or
 add gem 'guard' to your Gemfile
 
+Install test-unit
+gem install test-unit
+or add
+gem 'test-unit' to your Gemfile
+
 copy guard folder and Guardfile sample to your Rails application
 execute guard from the rails folder
 
