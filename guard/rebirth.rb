@@ -35,16 +35,32 @@ module Guard
       m = %r{^app/models/(.+)\.rb$}.match(p)
       camelize(m[1]) if m[1]
     end
+    def get_controller_name(p)
+      m = %r{^app/controllers/(.+)\.rb$}.match(p)
+      camelize(m[1]) if m[1]
+    end
     def get_unit_test_path(p)
       m = %r{^app/models/(.+)\.rb$}.match(p)
       "test/unit/#{m[1]}_test.rb"
     end
+    def get_functional_test_path(p)
+      m = %r{^app/controllers/(.+)\.rb$}.match(p)
+      "test/functional/#{m[1]}_test.rb"
+    end
     def get_test_name(p)
-      m = %r{^test/unit/(.+)\.rb$}.match(p)
-      camelize(m[1]) if m[1]
+      m = %r{^test/(unit|functional)/(.+)\.rb$}.match(p)
+      if m[2]
+        camelize(m[2])
+      end
     end
     def unit_test?(p)
       !!%r{^test/unit/(.+)\.rb$}.match(p)
+    end
+    def functional_test?(p)
+      !!%r{^test/functional/(.+)\.rb$}.match(p)
+    end
+    def controller?(p)
+      !!%r{^app/controllers/(.+)\.rb$}.match(p)
     end
     def model?(p)
       !!%r{^app/models/(.+)\.rb$}.match(p)
@@ -64,8 +80,18 @@ module Guard
         test_path = get_unit_test_path(path)
         test_class = reload(get_test_name(test_path),test_path)
         execute_test(test_class) if test_class
+      elsif controller?(path)
+        ::Guard::UI.info("Detected #{path} as controller!", :reset => true)
+        controller_class = reload(get_controller_name(path), path)
+        test_path = get_functional_test_path(path)
+        test_class = reload(get_test_name(test_path),test_path)
+        execute_test(test_class) if test_class
       elsif unit_test?(path)
         ::Guard::UI.info("Detected #{path} as unit test!", :reset => true)
+        test_class = reload(get_test_name(path),path)
+        execute_test(test_class) if test_class
+      elsif functional_test?(path)
+        ::Guard::UI.info("Detected #{path} as functional test!", :reset => true)
         test_class = reload(get_test_name(path),path)
         execute_test(test_class) if test_class
       else
