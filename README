@@ -1,27 +1,15 @@
 To use:
 
 Install guard gem
-gem install guard
-or
-add gem 'guard' to your Gemfile
+  gem install guard
+or add to Gemfile
+  gem 'guard'
 
-Install test-unit
-gem install test-unit
-or add
-gem 'test-unit' to your Gemfile
+Install dependencies
+  gem install test-unit json
+or add to Gemfile
+  gem 'test-unit'
+  gem 'json'
 
 copy guard folder and Guardfile sample to your Rails application
 execute guard from the rails folder
-
-
-
-
-
------------------- OLD VERSION ----------------------
-
-
-copy mytester.rb to your rails application folder
-
-idos> ruby mytester.rb
-
-when there is any changes the test will be automaticcally executed
