@@ -55,3 +55,8 @@ Please read the [Guard documentation](https://github.com/guard/guard#readme) for
 ## Author
 
 [Fajar Firdaus](https://github.com/fajarmf)
+
+
+## Kudos
+
+Many thanks to [Watchmen](https://github.com/watchmen) member.
